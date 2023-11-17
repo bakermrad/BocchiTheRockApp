@@ -1,5 +1,5 @@
-import 'package:bocchiapp/sceens/home_screen.dart';
-import 'package:bocchiapp/sceens/spash_screen.dart';
+import 'package:bocchiapp/views/home_screen.dart';
+import 'package:bocchiapp/views/spash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      // 1080 x 2400
+      designSize: const Size(1080, 2400),
       builder: (context, child) {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
