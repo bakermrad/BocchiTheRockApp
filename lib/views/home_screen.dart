@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           name: 'Ijichi Nijika')
     ];
     return Scaffold(
-      backgroundColor: AppColors.bocchiColor,
+      backgroundColor: AppColors.ryoColor,
       appBar: AppBar(
         // backgroundColor: AppColors.ryoColor,
         forceMaterialTransparency: true,
@@ -73,7 +73,11 @@ class HomeScreen extends StatelessWidget {
             child: Positioned(
               left: 80,
               top: 20,
-              child: Image.asset('assets/images/gotoh-1.png'),
+              child: Image.asset(
+                'assets/images/ryo-1-transformed.png',
+                height: 800,
+                width: 300,
+              ),
             ),
           ),
           Animate(
@@ -92,7 +96,7 @@ class HomeScreen extends StatelessWidget {
                   left: 30,
                   bottom: 70,
                   child: Text(
-                    characters[1].botomText,
+                    characters[0].botomText,
                     style: const TextStyle(
                         color: AppColors.textColor,
                         fontSize: 40,
@@ -107,9 +111,9 @@ class HomeScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                       child: Text(
-                        characters[1].name,
+                        characters[0].name,
                         style: const TextStyle(
-                          color: AppColors.bocchiColor,
+                          color: AppColors.ryoColor,
                           fontSize: 20,
                         ),
                       ),
