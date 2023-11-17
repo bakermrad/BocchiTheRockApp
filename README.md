@@ -1,16 +1,9 @@
-# bocchiapp
+# Bocchi App
 
-A new Flutter project.
+This is a personal passion project about the best anime ever created, none other than Bocchi The Rock.
 
-## Getting Started
+This project has no reason to exist expert that I like this show so much and I wanted to use it as the core of the personal projects I build when I want to learn something.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Note:
+_Ryo is The `BEST`_
