@@ -24,23 +24,24 @@ class HomeScreen extends StatelessWidget {
     ];
     return Scaffold(
       backgroundColor: AppColors.ryoColor,
-      appBar: AppBar(
-        // backgroundColor: AppColors.ryoColor,
-        forceMaterialTransparency: true,
-        elevation: 0,
-        centerTitle: true,
-        leading: Transform.scale(
-          scale: 0.80,
-          child: SvgPicture.asset(
-            'assets/icons/menus.svg',
-          ),
-        ),
-        title: Image.asset(
-          "assets/Logo_Bocchi-transformed.png",
-          width: 100,
-          height: 50,
-        ),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   // backgroundColor: AppColors.ryoColor,
+      //   forceMaterialTransparency: true,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   leading: Transform.scale(
+      //     scale: 0.80,
+      //     child: SvgPicture.asset(
+      //       'assets/icons/menus.svg',
+      //     ),
+      //   ),
+      //   title: Image.asset(
+      //     "assets/Logo_Bocchi-transformed.png",
+      //     width: 100,
+      //     height: 50,
+      //   ),
+      // ),
       body: Stack(
         children: [
           Animate(
@@ -81,9 +82,9 @@ class HomeScreen extends StatelessWidget {
             ],
             child: Positioned(
                 right: 0,
-                bottom: 0,
+                top: -10,
                 child: Container(
-                  height: MediaQuery.sizeOf(context).height,
+                  height: MediaQuery.sizeOf(context).height + 10,
                   width: 90,
                   color: AppColors.ryosecondColor,
                 )),
@@ -92,21 +93,21 @@ class HomeScreen extends StatelessWidget {
             effects: [
               MoveEffect(
                 curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1000.ms,
-                begin: const Offset(500, 0),
+                delay: 210.ms,
+                duration: 600.ms,
+                begin: const Offset(400, 0),
                 end: const Offset(0, 0),
               )
             ],
             child: Positioned(
                 right: 0,
-                bottom: 100,
+                bottom: 80,
                 child: RotatedBox(
                   quarterTurns: -1,
                   child: Text(
                     characters[0].name,
                     style: const TextStyle(
-                        fontSize: 100,
+                        fontSize: 90,
                         fontWeight: FontWeight.bold,
                         color: AppColors.ryoColor),
                   ),
@@ -117,28 +118,45 @@ class HomeScreen extends StatelessWidget {
               MoveEffect(
                 curve: Curves.fastLinearToSlowEaseIn,
                 delay: 200.ms,
-                duration: 1000.ms,
-                begin: const Offset(500, 0),
+                duration: 800.ms,
+                begin: const Offset(600, 0),
                 end: const Offset(0, 0),
               )
             ],
-            child: Positioned(
-                right: 0,
-                top: 10,
+            child: Stack(children: [
+              Positioned(
+                right: 20,
+                top: 70,
                 child: Container(
                   color: AppColors.textColor,
-                  height: 60,
-                  width: 60,
+                  height: 50,
+                  width: 50,
                   child: Image.asset(
                     "assets/ryo_img_1.png",
-                    height: 50,
-                    width: 50,
+                    height: 45,
+                    width: 45,
                   ),
-                )),
+                ),
+              ),
+              Positioned(
+                right: 20,
+                top: 140,
+                child: Container(
+                  color: AppColors.textColor,
+                  height: 50,
+                  width: 50,
+                  child: Image.asset(
+                    "assets/ryo_img_2.png",
+                    height: 45,
+                    width: 45,
+                  ),
+                ),
+              ),
+            ]),
           ),
           Positioned(
             right: 10,
-            bottom: -20,
+            bottom: -40,
             child: Container(
               decoration: const BoxDecoration(
                 boxShadow: [
@@ -171,7 +189,7 @@ class HomeScreen extends StatelessWidget {
             ],
             child: Positioned(
               left: 80,
-              top: 20,
+              top: 80,
               child: Image.asset(
                 'assets/images/ryo-1-transformed.png',
                 height: 800,
@@ -218,7 +236,7 @@ class HomeScreen extends StatelessWidget {
             ],
             child: Positioned(
               left: 30,
-              bottom: 230,
+              bottom: 227,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
@@ -241,7 +259,7 @@ class HomeScreen extends StatelessWidget {
             ],
             child: Positioned(
               left: 30,
-              bottom: 213,
+              bottom: 210,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
@@ -360,7 +378,7 @@ class HomeScreen extends StatelessWidget {
                   child: Container(
                     color: AppColors.textColor,
                     child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
                       child: Text(
                         characters[0].name,
                         style: const TextStyle(
@@ -374,6 +392,64 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1000.ms,
+                begin: const Offset(-320, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 45,
+                  right: 125,
+                  child: Container(
+                    color: AppColors.nijikaColor,
+                    height: 25,
+                    width: 25,
+                  ),
+                ),
+                Positioned(
+                  bottom: 45,
+                  right: 80,
+                  child: Container(
+                    color: AppColors.kitaColor,
+                    height: 25,
+                    width: 25,
+                  ),
+                ),
+                Positioned(
+                  bottom: 45,
+                  right: 35,
+                  child: Container(
+                    color: AppColors.bocchiColor,
+                    height: 25,
+                    width: 25,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 30,
+            left: MediaQuery.sizeOf(context).width / 2 - 50,
+            child: Image.asset(
+              "assets/Logo_Bocchi-transformed.png",
+              width: 100,
+              height: 50,
+            ),
+          ),
+          Positioned(
+            top: 30,
+            left: 30,
+            child: SvgPicture.asset(
+              'assets/icons/menus.svg',
+            ),
+          )
         ],
       ),
     );
