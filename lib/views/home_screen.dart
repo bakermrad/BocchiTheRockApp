@@ -43,14 +43,119 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1300.ms,
+                begin: const Offset(1000, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+              left: -260,
+              top: -60,
+              child: Transform.flip(
+                flipX: true,
+                child: Opacity(
+                  opacity: 0.2,
+                  child: Image.asset(
+                    'assets/images/ryo-1-transformed.png',
+                    height: 1200,
+                    width: 600,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1000.ms,
+                begin: const Offset(500, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+                right: 0,
+                bottom: 0,
+                child: Container(
+                  height: MediaQuery.sizeOf(context).height,
+                  width: 90,
+                  color: AppColors.ryosecondColor,
+                )),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1000.ms,
+                begin: const Offset(500, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+                right: 0,
+                bottom: 100,
+                child: RotatedBox(
+                  quarterTurns: -1,
+                  child: Text(
+                    characters[0].name,
+                    style: const TextStyle(
+                        fontSize: 100,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.ryoColor),
+                  ),
+                )),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1000.ms,
+                begin: const Offset(500, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+                right: 0,
+                top: 10,
+                child: Container(
+                  color: AppColors.textColor,
+                  height: 60,
+                  width: 60,
+                  child: Image.asset(
+                    "assets/ryo_img_1.png",
+                    height: 50,
+                    width: 50,
+                  ),
+                )),
+          ),
           Positioned(
             right: 10,
             bottom: -20,
-            child: Transform.scale(
-              scale: 1.15,
-              child: Opacity(
-                opacity: 0.6,
-                child: Image.asset('assets/Dots element.png'),
+            child: Container(
+              decoration: const BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: AppColors.ryoColor,
+                    offset: Offset(0.0, 0.0),
+                    blurRadius: 100.0,
+                    spreadRadius: 51.0,
+                  ), //BoxShadow
+                ],
+              ),
+              child: Transform.scale(
+                scale: 1.15,
+                child: Opacity(
+                  opacity: 0.6,
+                  child: Image.asset('assets/Dots element.png'),
+                ),
               ),
             ),
           ),
