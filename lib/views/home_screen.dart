@@ -1,20 +1,14 @@
+import 'dart:ui';
+
 import 'package:bocchiapp/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import '../model/character_class.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import 'dart:ui' as ui;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  // Future<File> saveCharacterToFile(Character character) async {
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final file = File('${directory.path}/selected_character.txt');
-  //   final characterJson = jsonEncode(character);
-  //   return file.writeAsString(characterJson);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +60,8 @@ class HomeScreen extends StatelessWidget {
                 curve: Curves.fastLinearToSlowEaseIn,
                 delay: 200.ms,
                 duration: 1300.ms,
-                begin: Offset(-500, 0),
-                end: Offset(0, 0),
+                begin: const Offset(-500, 0),
+                end: const Offset(0, 0),
               )
             ],
             child: Positioned(
@@ -83,11 +77,163 @@ class HomeScreen extends StatelessWidget {
           Animate(
             effects: [
               MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1300.ms,
+                begin: const Offset(700, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+                left: 30,
+                bottom: 250,
+                child: Container(
+                  color: Colors.black,
+                  child: const Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      "SEPTEMBER 18",
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15),
+                    ),
+                  ),
+                )),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1300.ms,
+                begin: const Offset(700, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+              left: 30,
+              bottom: 230,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  characters[0].weightHeight,
+                  style:
+                      const TextStyle(color: AppColors.textColor, fontSize: 14),
+                ),
+              ),
+            ),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
+                curve: Curves.fastLinearToSlowEaseIn,
+                delay: 200.ms,
+                duration: 1300.ms,
+                begin: const Offset(700, 0),
+                end: const Offset(0, 0),
+              )
+            ],
+            child: Positioned(
+              left: 30,
+              bottom: 213,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Text(
+                  characters[0].eyesColor,
+                  style:
+                      const TextStyle(color: AppColors.textColor, fontSize: 13),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            right: 30,
+            bottom: 200,
+            child: Animate(
+              effects: [
+                MoveEffect(
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  delay: 200.ms,
+                  duration: 1300.ms,
+                  begin: const Offset(500, 0),
+                  end: const Offset(0, 0),
+                )
+              ],
+              child: Stack(
+                children: [
+                  const Positioned(
+                    child: Text(
+                      "“",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      characters[0].sideText,
+                      style: const TextStyle(
+                        fontSize: 30,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  const Positioned(
+                    top: 40,
+                    right: 0,
+                    child: Text(
+                      "”",
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: ClipRect(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                    sigmaX: 5,
+                    sigmaY:
+                        5), // Adjust the sigmaX and sigmaY values for desired blur intensity
+                child: Container(
+                  height: 40,
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppColors.ryoColor
+                            .withOpacity(0.1), // Transparent color at the top
+                        AppColors.ryoColor.withOpacity(
+                            1), // Semi-transparent color at the bottom
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Animate(
+            effects: [
+              MoveEffect(
                 curve: Curves.fastEaseInToSlowEaseOut,
                 delay: 200.ms,
                 duration: 1000.ms,
-                begin: Offset(-250, 0),
-                end: Offset(0, 0),
+                begin: const Offset(-250, 0),
+                end: const Offset(0, 0),
               )
             ],
             child: Stack(
