@@ -1,29 +1,69 @@
 import 'dart:ui';
-
 import 'package:bocchiapp/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
 import '../model/character_class.dart';
-import 'dart:ui' as ui;
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int index = 0;
+  @override
   Widget build(BuildContext context) {
     List<Character> characters = [
-      Character("50 kg & 163 cm", "Yellow eye", "ハムキタス", "山田 リョウ",
+      Character(
+          "50 kg & 163 cm",
+          "Yellow eye",
+          "ハムキタス",
+          "山田 リョウ",
+          "assets/images/ryo-1-transformed.png",
+          "assets/ryo_img_1.png",
+          "assets/ryo_img_2.png",
+          AppColors.ryoColor,
+          AppColors.ryosecondColor,
           name: 'Yamada Ryo'),
-      Character("50 kg & 156 cm", "Aqua eye", 'ギターヒーロー', '後藤 ひとり',
+      Character(
+          "50 kg & 156 cm",
+          "Aqua eye",
+          'ギターヒーロー',
+          '後藤 ひとり',
+          "assets/images/gotoh-1 (1).png",
+          "assets/bocchi_img_1.png",
+          "assets/bocchi_img_2.png",
+          AppColors.bocchiColor,
+          AppColors.bocchiSecondColor,
           name: 'Hitori Gotō'),
-      Character('44 kg & 158 cm', 'Yellow eye', '逃げたギタ', '喜多 郁代',
+      Character(
+          '44 kg & 158 cm',
+          'Yellow eye',
+          '逃げたギタ',
+          '喜多 郁代',
+          "assets/images/ikuyo-1-transformed.png",
+          "assets/Kita_img_1.png",
+          "assets/Kita_img_2.png",
+          AppColors.kitaColor,
+          AppColors.kitaSecondColor,
           name: 'Ikuyo Kita'),
-      Character('48 kg & 154 cm', 'Vermillion eye', '下北沢の大天使', '伊地知 虹夏',
+      Character(
+          '48 kg & 154 cm',
+          'Vermillion eye',
+          '下北沢の大天使',
+          '伊地知 虹夏',
+          "assets/images/nijika (1).png",
+          "assets/Nijika_img_1.png",
+          "assets/Nijika_img_2.png",
+          AppColors.nijikaColor,
+          AppColors.nijikaSecondColor,
           name: 'Ijichi Nijika')
     ];
     return Scaffold(
-      backgroundColor: AppColors.ryoColor,
+      backgroundColor: characters[index].color,
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
       //   // backgroundColor: AppColors.ryoColor,
@@ -62,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                 child: Opacity(
                   opacity: 0.2,
                   child: Image.asset(
-                    'assets/images/ryo-1-transformed.png',
+                    characters[index].mainImage,
                     height: 1200,
                     width: 600,
                   ),
@@ -86,7 +126,7 @@ class HomeScreen extends StatelessWidget {
                 child: Container(
                   height: MediaQuery.sizeOf(context).height + 10,
                   width: 90,
-                  color: AppColors.ryosecondColor,
+                  color: characters[index].color2,
                 )),
           ),
           Animate(
@@ -105,11 +145,11 @@ class HomeScreen extends StatelessWidget {
                 child: RotatedBox(
                   quarterTurns: -1,
                   child: Text(
-                    characters[0].name,
-                    style: const TextStyle(
+                    characters[index].name,
+                    style: TextStyle(
                         fontSize: 90,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.ryoColor),
+                        color: characters[index].color2),
                   ),
                 )),
           ),
@@ -132,7 +172,7 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: Image.asset(
-                    "assets/ryo_img_1.png",
+                    characters[index].img1,
                     height: 45,
                     width: 45,
                   ),
@@ -146,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   width: 50,
                   child: Image.asset(
-                    "assets/ryo_img_2.png",
+                    characters[index].img2,
                     height: 45,
                     width: 45,
                   ),
@@ -158,10 +198,10 @@ class HomeScreen extends StatelessWidget {
             right: 10,
             bottom: -40,
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.ryoColor,
+                    color: characters[index].color,
                     offset: Offset(0.0, 0.0),
                     blurRadius: 100.0,
                     spreadRadius: 51.0,
@@ -188,10 +228,10 @@ class HomeScreen extends StatelessWidget {
               )
             ],
             child: Positioned(
-              left: 80,
+              left: MediaQuery.sizeOf(context).width / 2 - 150,
               top: 80,
               child: Image.asset(
-                'assets/images/ryo-1-transformed.png',
+                characters[index].mainImage,
                 height: 800,
                 width: 300,
               ),
@@ -240,7 +280,7 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
-                  characters[0].weightHeight,
+                  characters[index].weightHeight,
                   style:
                       const TextStyle(color: AppColors.textColor, fontSize: 14),
                 ),
@@ -263,7 +303,7 @@ class HomeScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
-                  characters[0].eyesColor,
+                  characters[index].eyesColor,
                   style:
                       const TextStyle(color: AppColors.textColor, fontSize: 13),
                 ),
@@ -298,7 +338,7 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      characters[0].sideText,
+                      characters[index].sideText,
                       style: const TextStyle(
                         fontSize: 30,
                         color: AppColors.textColor,
@@ -338,9 +378,10 @@ class HomeScreen extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        AppColors.ryoColor
+                        characters[index]
+                            .color
                             .withOpacity(0.1), // Transparent color at the top
-                        AppColors.ryoColor.withOpacity(
+                        characters[index].color.withOpacity(
                             1), // Semi-transparent color at the bottom
                       ],
                     ),
@@ -381,8 +422,8 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
                       child: Text(
                         characters[0].name,
-                        style: const TextStyle(
-                          color: AppColors.ryoColor,
+                        style: TextStyle(
+                          color: characters[index].color,
                           fontSize: 20,
                         ),
                       ),
