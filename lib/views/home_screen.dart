@@ -92,7 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 duration: 1300.ms,
                 begin: const Offset(1000, 0),
                 end: const Offset(0, 0),
-              )
+              ),
+              ShimmerEffect(
+                duration: 1500.ms,
+                delay: 150.ms,
+              ),
             ],
             child: Positioned(
               left: -260,
@@ -118,7 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 duration: 1000.ms,
                 begin: const Offset(500, 0),
                 end: const Offset(0, 0),
-              )
+              ),
+              ShimmerEffect(duration: 2500.ms, delay: 500.ms, angle: -1),
             ],
             child: Positioned(
                 right: 0,
@@ -149,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         fontSize: 90,
                         fontWeight: FontWeight.bold,
-                        color: characters[index].color2),
+                        color: characters[index].color),
                   ),
                 )),
           ),
@@ -225,7 +230,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 duration: 1300.ms,
                 begin: const Offset(-500, 0),
                 end: const Offset(0, 0),
-              )
+              ),
+              ShimmerEffect(
+                duration: 2500.ms,
+                delay: 300.ms,
+              ),
             ],
             child: Positioned(
               left: MediaQuery.sizeOf(context).width / 2 - 150,
@@ -406,7 +415,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   left: 30,
                   bottom: 70,
                   child: Text(
-                    characters[0].botomText,
+                    characters[index].botomText,
                     style: const TextStyle(
                         color: AppColors.textColor,
                         fontSize: 40,
@@ -421,7 +430,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
                       child: Text(
-                        characters[0].name,
+                        characters[index].name,
                         style: TextStyle(
                           color: characters[index].color,
                           fontSize: 20,
@@ -448,28 +457,49 @@ class _HomeScreenState extends State<HomeScreen> {
                 Positioned(
                   bottom: 45,
                   right: 125,
-                  child: Container(
-                    color: AppColors.nijikaColor,
-                    height: 25,
-                    width: 25,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        index = 3;
+                      });
+                    },
+                    child: Container(
+                      color: AppColors.nijikaColor,
+                      height: 25,
+                      width: 25,
+                    ),
                   ),
                 ),
                 Positioned(
                   bottom: 45,
                   right: 80,
-                  child: Container(
-                    color: AppColors.kitaColor,
-                    height: 25,
-                    width: 25,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        index = 2;
+                      });
+                    },
+                    child: Container(
+                      color: AppColors.kitaColor,
+                      height: 25,
+                      width: 25,
+                    ),
                   ),
                 ),
                 Positioned(
                   bottom: 45,
                   right: 35,
-                  child: Container(
-                    color: AppColors.bocchiColor,
-                    height: 25,
-                    width: 25,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        index = 1;
+                      });
+                    },
+                    child: Container(
+                      color: AppColors.bocchiColor,
+                      height: 25,
+                      width: 25,
+                    ),
                   ),
                 ),
               ],
