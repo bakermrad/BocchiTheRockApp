@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Yellow eye',
           '逃げたギタ',
           '喜多 郁代',
-          "assets/images/ikuyo-1-transformed.png",
+          "assets/images/ikuyo-2-transformed.png",
           "assets/Kita_img_1.png",
           "assets/Kita_img_2.png",
           AppColors.kitaColor,
@@ -55,7 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
           'Vermillion eye',
           '下北沢の大天使',
           '伊地知 虹夏',
-          "assets/images/nijika (1).png",
+          "assets/images/nijika (2).png",
           "assets/Nijika_img_1.png",
           "assets/Nijika_img_2.png",
           AppColors.nijikaColor,
@@ -515,8 +515,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
-            top: 30,
-            left: 30,
+            top: 40,
+            left: 20,
             child: SvgPicture.asset(
               'assets/icons/menus.svg',
             ),
