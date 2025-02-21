@@ -1,8 +1,12 @@
 import 'dart:ui';
+import 'package:bocchiapp/controllers/character_controller.dart';
 import 'package:bocchiapp/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
 import '../model/character_class.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -13,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int index = 0;
+  CharacterController controller = Get.put(CharacterController());
+
   @override
   Widget build(BuildContext context) {
     List<Character> characters = [
@@ -63,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           name: 'Ijichi Nijika')
     ];
     return Scaffold(
-      backgroundColor: characters[index].color,
+      backgroundColor: characters[controller.index.value].color,
       // appBar: AppBar(
       //   backgroundColor: Colors.transparent,
       //   // backgroundColor: AppColors.ryoColor,
@@ -84,121 +89,125 @@ class _HomeScreenState extends State<HomeScreen> {
       // ),
       body: Stack(
         children: [
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1300.ms,
-                begin: const Offset(1000, 0),
-                end: const Offset(0, 0),
-              ),
-              ShimmerEffect(
-                duration: 1500.ms,
-                delay: 150.ms,
-              ),
-            ],
-            child: Positioned(
-              left: -260,
-              top: -60,
-              child: Transform.flip(
-                flipX: true,
-                child: Opacity(
-                  opacity: 0.2,
-                  child: Image.asset(
-                    characters[index].mainImage,
-                    height: 1200,
-                    width: 600,
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1300.ms,
+                    begin: const Offset(1000, 0),
+                    end: const Offset(0, 0),
+                  ),
+                  ShimmerEffect(
+                    duration: 1500.ms,
+                    delay: 150.ms,
+                  ),
+                ],
+                child: Positioned(
+                  left: -260,
+                  top: -60,
+                  child: Transform.flip(
+                    flipX: true,
+                    child: Opacity(
+                      opacity: 0.2,
+                      child: Image.asset(
+                        characters[controller.index.value].mainImage,
+                        height: 1200,
+                        width: 600,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1000.ms,
-                begin: const Offset(500, 0),
-                end: const Offset(0, 0),
-              ),
-              ShimmerEffect(duration: 2500.ms, delay: 500.ms, angle: -1),
-            ],
-            child: Positioned(
-                right: 0,
-                top: -10,
-                child: Container(
-                  height: MediaQuery.sizeOf(context).height + 10,
-                  width: 90,
-                  color: characters[index].color2,
-                )),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 210.ms,
-                duration: 600.ms,
-                begin: const Offset(400, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Positioned(
-                right: 0,
-                bottom: 80,
-                child: RotatedBox(
-                  quarterTurns: -1,
-                  child: Text(
-                    characters[index].name,
-                    style: TextStyle(
-                        fontSize: 90,
-                        fontWeight: FontWeight.bold,
-                        color: characters[index].color),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1000.ms,
+                    begin: const Offset(500, 0),
+                    end: const Offset(0, 0),
                   ),
-                )),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 800.ms,
-                begin: const Offset(600, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Stack(children: [
-              Positioned(
-                right: 20,
-                top: 70,
-                child: Container(
-                  color: AppColors.textColor,
-                  height: 50,
-                  width: 50,
-                  child: Image.asset(
-                    characters[index].img1,
-                    height: 45,
-                    width: 45,
+                  ShimmerEffect(duration: 2500.ms, delay: 500.ms, angle: -1),
+                ],
+                child: Positioned(
+                    right: 0,
+                    top: -10,
+                    child: Container(
+                      height: MediaQuery.sizeOf(context).height + 10,
+                      width: 90,
+                      color: characters[controller.index.value].color2,
+                    )),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 210.ms,
+                    duration: 600.ms,
+                    begin: const Offset(400, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Positioned(
+                    right: 0,
+                    bottom: 80,
+                    child: RotatedBox(
+                      quarterTurns: -1,
+                      child: Text(
+                        characters[controller.index.value].name,
+                        style: TextStyle(
+                            fontSize: 90,
+                            fontWeight: FontWeight.bold,
+                            color: characters[controller.index.value].color),
+                      ),
+                    )),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 800.ms,
+                    begin: const Offset(600, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Stack(children: [
+                  Positioned(
+                    right: 20,
+                    top: 70,
+                    child: Container(
+                      color: AppColors.textColor,
+                      height: 50,
+                      width: 50,
+                      child: Image.asset(
+                        characters[controller.index.value].img1,
+                        height: 45,
+                        width: 45,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Positioned(
-                right: 20,
-                top: 140,
-                child: Container(
-                  color: AppColors.textColor,
-                  height: 50,
-                  width: 50,
-                  child: Image.asset(
-                    characters[index].img2,
-                    height: 45,
-                    width: 45,
+                  Positioned(
+                    right: 20,
+                    top: 140,
+                    child: Container(
+                      color: AppColors.textColor,
+                      height: 50,
+                      width: 50,
+                      child: Image.asset(
+                        characters[controller.index.value].img2,
+                        height: 45,
+                        width: 45,
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ]),
-          ),
+                ]),
+              )),
           Positioned(
             right: 10,
             bottom: -40,
@@ -206,8 +215,8 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: characters[index].color,
-                    offset: Offset(0.0, 0.0),
+                    color: characters[controller.index.value].color,
+                    offset: const Offset(0.0, 0.0),
                     blurRadius: 100.0,
                     spreadRadius: 51.0,
                   ), //BoxShadow
@@ -222,103 +231,107 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1300.ms,
-                begin: const Offset(-500, 0),
-                end: const Offset(0, 0),
-              ),
-              ShimmerEffect(
-                duration: 2500.ms,
-                delay: 300.ms,
-              ),
-            ],
-            child: Positioned(
-              left: MediaQuery.sizeOf(context).width / 2 - 150,
-              top: 80,
-              child: Image.asset(
-                characters[index].mainImage,
-                height: 800,
-                width: 300,
-              ),
-            ),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1300.ms,
-                begin: const Offset(700, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Positioned(
-                left: 30,
-                bottom: 250,
-                child: Container(
-                  color: Colors.black,
-                  child: const Padding(
-                    padding: EdgeInsets.all(5.0),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1300.ms,
+                    begin: const Offset(-500, 0),
+                    end: const Offset(0, 0),
+                  ),
+                  ShimmerEffect(
+                    duration: 2500.ms,
+                    delay: 300.ms,
+                  ),
+                ],
+                child: Positioned(
+                  left: MediaQuery.sizeOf(context).width / 2 - 150,
+                  top: 80,
+                  child: Image.asset(
+                    characters[controller.index.value].mainImage,
+                    height: 800,
+                    width: 300,
+                  ),
+                ),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1300.ms,
+                    begin: const Offset(700, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Positioned(
+                    left: 30,
+                    bottom: 250,
+                    child: Container(
+                      color: Colors.black,
+                      child: const Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: Text(
+                          "SEPTEMBER 18",
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
+                      ),
+                    )),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1300.ms,
+                    begin: const Offset(700, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Positioned(
+                  left: 30,
+                  bottom: 227,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      "SEPTEMBER 18",
-                      style: TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15),
+                      characters[controller.index.value].weightHeight,
+                      style: const TextStyle(
+                          color: AppColors.textColor, fontSize: 14),
                     ),
                   ),
-                )),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1300.ms,
-                begin: const Offset(700, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Positioned(
-              left: 30,
-              bottom: 227,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  characters[index].weightHeight,
-                  style:
-                      const TextStyle(color: AppColors.textColor, fontSize: 14),
                 ),
-              ),
-            ),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1300.ms,
-                begin: const Offset(700, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Positioned(
-              left: 30,
-              bottom: 210,
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  characters[index].eyesColor,
-                  style:
-                      const TextStyle(color: AppColors.textColor, fontSize: 13),
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1300.ms,
+                    begin: const Offset(700, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Positioned(
+                  left: 30,
+                  bottom: 210,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      characters[controller.index.value].eyesColor,
+                      style: const TextStyle(
+                          color: AppColors.textColor, fontSize: 13),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
+              )),
           Positioned(
             right: 30,
             bottom: 200,
@@ -347,7 +360,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      characters[index].sideText,
+                      characters[controller.index.value].sideText,
                       style: const TextStyle(
                         fontSize: 30,
                         color: AppColors.textColor,
@@ -387,10 +400,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        characters[index]
+                        characters[controller.index.value]
                             .color
                             .withOpacity(0.1), // Transparent color at the top
-                        characters[index].color.withOpacity(
+                        characters[controller.index.value].color.withOpacity(
                             1), // Semi-transparent color at the bottom
                       ],
                     ),
@@ -399,112 +412,130 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastEaseInToSlowEaseOut,
-                delay: 200.ms,
-                duration: 1000.ms,
-                begin: const Offset(-250, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Stack(
-              children: [
-                Positioned(
-                  left: 30,
-                  bottom: 70,
-                  child: Text(
-                    characters[index].botomText,
-                    style: const TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Positioned(
-                  left: 30,
-                  bottom: 45,
-                  child: Container(
-                    color: AppColors.textColor,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastEaseInToSlowEaseOut,
+                    delay: 200.ms,
+                    duration: 1000.ms,
+                    begin: const Offset(-250, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 30,
+                      bottom: 70,
                       child: Text(
-                        characters[index].name,
-                        style: TextStyle(
-                          color: characters[index].color,
-                          fontSize: 20,
+                        characters[controller.index.value].botomText,
+                        style: const TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Positioned(
+                      left: 30,
+                      bottom: 45,
+                      child: Container(
+                        color: AppColors.textColor,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 0, 20, 0),
+                          child: Text(
+                            characters[controller.index.value].name,
+                            style: TextStyle(
+                              color: characters[controller.index.value].color,
+                              fontSize: 20,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          Animate(
-            effects: [
-              MoveEffect(
-                curve: Curves.fastLinearToSlowEaseIn,
-                delay: 200.ms,
-                duration: 1000.ms,
-                begin: const Offset(-320, 0),
-                end: const Offset(0, 0),
-              )
-            ],
-            child: Stack(
-              children: [
-                Positioned(
-                  bottom: 45,
-                  right: 125,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 3;
-                      });
-                    },
-                    child: Container(
-                      color: AppColors.nijikaColor,
-                      height: 25,
-                      width: 25,
+              )),
+          Obx(() => Animate(
+                key: ValueKey(controller.index.value),
+                effects: [
+                  MoveEffect(
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    delay: 200.ms,
+                    duration: 1000.ms,
+                    begin: const Offset(-520, 0),
+                    end: const Offset(0, 0),
+                  )
+                ],
+                child: Stack(
+                  children: [
+                    Positioned(
+                      bottom: 45,
+                      right: 130,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            controller.nijika();
+                          });
+                        },
+                        child: Container(
+                          color: AppColors.nijikaColor,
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 45,
-                  right: 80,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 2;
-                      });
-                    },
-                    child: Container(
-                      color: AppColors.kitaColor,
-                      height: 25,
-                      width: 25,
+                    Positioned(
+                      bottom: 45,
+                      right: 90,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            controller.kita();
+                          });
+                        },
+                        child: Container(
+                          color: AppColors.kitaColor,
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 45,
-                  right: 35,
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        index = 1;
-                      });
-                    },
-                    child: Container(
-                      color: AppColors.bocchiColor,
-                      height: 25,
-                      width: 25,
+                    Positioned(
+                      bottom: 45,
+                      right: 50,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            controller.bocchi();
+                          });
+                        },
+                        child: Container(
+                          color: AppColors.bocchiColor,
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 45,
+                      right: 10,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            controller.ryo();
+                          });
+                        },
+                        child: Container(
+                          color: AppColors.ryoColor,
+                          height: 25,
+                          width: 25,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
+              )),
           Positioned(
             top: 30,
             left: MediaQuery.sizeOf(context).width / 2 - 50,

@@ -38,6 +38,9 @@ dependencies:
   flutter_screenutil: ^5.9.0
   flutter_animate: ^4.2.0+1
   flutter_svg: ^2.0.9
+  get: ^4.6.6
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.11
   # get: ^4.6.6
 
 dev_dependencies:
@@ -53,6 +56,20 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_native_splash:
+  color: "#1c1c1c"
+  image: "assets/Logo_Bocchi-transformed.png"
+  android: true
+  ios: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/Ryo.jpg"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+
 
 # The following section is specific to Flutter packages.
 flutter:
