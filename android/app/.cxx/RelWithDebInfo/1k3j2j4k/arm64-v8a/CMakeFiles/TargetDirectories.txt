@@ -1,0 +1,2 @@
+/Users/admin/Documents/code/flutter/BocchiTheRockApp/android/app/.cxx/RelWithDebInfo/1k3j2j4k/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/admin/Documents/code/flutter/BocchiTheRockApp/android/app/.cxx/RelWithDebInfo/1k3j2j4k/arm64-v8a/CMakeFiles/rebuild_cache.dir
