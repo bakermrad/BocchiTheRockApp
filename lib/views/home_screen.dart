@@ -4,10 +4,13 @@ import 'package:bocchiapp/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
+import 'package:home_widget/home_widget.dart';
 import '../model/character_class.dart';
+import 'dart:io';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:path_provider/path_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,8 +19,33 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
+const String appGroupId = 'com.example.bocchiapp';
+// const String iOSWidgetName = 'NewsWidgets';
+const String androidWidgetName = 'BocchiTheRock';
+
+Future<void> updateHeadline(Character character) async {
+  final imageBytes = await rootBundle.load(character.mainImage);
+  final dir = await getApplicationSupportDirectory();
+  final file = File('${dir.path}/widget_image.png');
+  await file.writeAsBytes(imageBytes.buffer.asUint8List());
+  await HomeWidget.saveWidgetData<String>('headline_title', character.name);
+  await HomeWidget.saveWidgetData<String>(
+      'headline_description', character.botomText);
+  await HomeWidget.saveWidgetData<String>('headline_image', file.path);
+  await HomeWidget.updateWidget(androidName: 'BocchiTheRock');
+}
+
 class _HomeScreenState extends State<HomeScreen> {
   CharacterController controller = Get.put(CharacterController());
+
+  @override
+  void initState() {
+    super.initState();
+
+    HomeWidget.setAppGroupId(appGroupId);
+    final newCharacter = getcharacters()[0];
+    updateHeadline(newCharacter);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     offset: const Offset(0.0, 0.0),
                     blurRadius: 100.0,
                     spreadRadius: 51.0,
-                  ), //BoxShadow
+                  ),
                 ],
               ),
               child: Transform.scale(
@@ -388,10 +416,7 @@ class _HomeScreenState extends State<HomeScreen> {
             bottom: 0,
             child: ClipRect(
               child: BackdropFilter(
-                filter: ImageFilter.blur(
-                    sigmaX: 5,
-                    sigmaY:
-                        5), // Adjust the sigmaX and sigmaY values for desired blur intensity
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 child: Container(
                   height: 40,
                   width: MediaQuery.sizeOf(context).width,
@@ -402,9 +427,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       colors: [
                         characters[controller.index.value]
                             .color
-                            .withOpacity(0.1), // Transparent color at the top
-                        characters[controller.index.value].color.withOpacity(
-                            1), // Semi-transparent color at the bottom
+                            .withOpacity(0.1),
+                        characters[controller.index.value].color.withOpacity(1),
                       ],
                     ),
                   ),
@@ -476,6 +500,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           setState(() {
                             controller.nijika();
+                            updateHeadline(characters[controller.index.value]);
                           });
                         },
                         child: Container(
@@ -492,6 +517,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           setState(() {
                             controller.kita();
+                            updateHeadline(characters[controller.index.value]);
                           });
                         },
                         child: Container(
@@ -508,6 +534,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           setState(() {
                             controller.bocchi();
+                            updateHeadline(characters[controller.index.value]);
                           });
                         },
                         child: Container(
@@ -524,6 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           setState(() {
                             controller.ryo();
+                            updateHeadline(characters[controller.index.value]);
                           });
                         },
                         child: Container(

@@ -19,13 +19,13 @@ class CharacterController extends GetxController {
 
   void nijika() {
     character.value = "Nijika";
-    index.value = 2;
+    index.value = 3;
     update();
   }
 
   void kita() {
     character.value = "Kita";
-    index.value = 3;
+    index.value = 2;
     update();
   }
 }
